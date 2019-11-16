@@ -1,9 +1,13 @@
 interface GesturePasswordProps {
     id?: string;
     el?: HTMLElement;
-    context?: CanvasRenderingContext2D;
     width: number;
     height: number;
+    background?: string;
+    lineColor?: string;
+    lineBackground?: string;
+    rowPont?: number;
+    colPont?: number;
 }
 
 interface Coordinate {
@@ -13,32 +17,36 @@ interface Coordinate {
 }
 
 class GesturePassword {
-    private id?: string;
-    private el?: HTMLElement | HTMLCanvasElement;
-    private context?: CanvasRenderingContext2D;
+    private el: HTMLCanvasElement;
+    private context: CanvasRenderingContext2D;
     private width: number; // 画布的宽
     private height: number; // 画布的高
+    private background: string; // 背景颜色
+    private lineColor: string; // 线颜色
+    private lineBackground: string; // 线背景颜色
     private circleR: number; // 圆的半径
     private rowPont: number; // 一行有几个圆
     private colPont: number; // 一列有几个圆
-    private initCircleCoordinate: Coordinate[]; // 圆的初始化坐标
-    private selectedCoordinate: Coordinate[]; // 圆的初始化坐标
-    private candidateCoordinate: Coordinate[]; // 圆的初始化坐标
+    private initCircleCoordinate: Coordinate[] = []; // 圆的初始化坐标
+    private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
+    private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
     private isActive: boolean; // 是否激活状态
 
     constructor(props: GesturePasswordProps) {
-        const { id, el, context, width, height } = props;
-        this.id = id;
-        this.el = el || window.document.getElementById(this.id);
-        this.context = context || (this.el as HTMLCanvasElement).getContext('2d');
+        const { id, el, width, height, background = "#FFF", lineColor = "#0089FF", lineBackground = "#D9EDFF", rowPont = 3, colPont = 3, } = props
+        this.el = (el || window.document.getElementById(id as string)) as HTMLCanvasElement;
+        this.context = (this.el.getContext('2d')) as CanvasRenderingContext2D;
         this.width = width;
         this.height = height;
+        this.background = background;
+        this.lineColor = lineColor;
+        this.lineBackground = lineBackground;
         this.circleR = this.width * 28 / 375;
         if (this.width > this.height) {
             this.circleR = this.height * 28 / 375;
         }
-        this.rowPont = 3;
-        this.colPont = 3;
+        this.rowPont = rowPont;
+        this.colPont = colPont;
         this.isActive = false;
         this.initCanvas();
     }
@@ -53,7 +61,7 @@ class GesturePassword {
     addEventListener() {
         let self = this;
         // TODO:这里的类型是什么呢？？
-        const touchstartFun = (e) => {
+        const touchstartFun = (e: any) => {
             e.preventDefault();
             let po = self.getPosition(e);
             for (let i = 0; i < this.candidateCoordinate.length; i++) {
@@ -66,12 +74,12 @@ class GesturePassword {
                 }
             }
         }
-        const touchmoveFun = (e) => {
+        const touchmoveFun = (e: any) => {
             if (self.isActive) {
                 self.update(self.getPosition(e));
             }
         }
-        const touchendFun = (e) => {
+        const touchendFun = (e: any) => {
             if (self.isActive) {
                 self.isActive = false;
                 self.draw();
@@ -155,11 +163,13 @@ class GesturePassword {
         // 清空绘图
         this.context.clearRect(0, 0, this.width, this.height);
         // 绘制背景
-        this.context.fillStyle = "#FFF";
+        this.context.fillStyle = this.background;
+        console.log(this.background);
+
         this.context.fillRect(0, 0, this.width, this.height);
         // 绘制默认圆点
         this.context.lineWidth = 1;
-        this.context.strokeStyle = "#0089FF";
+        this.context.strokeStyle = this.lineColor;
         this.context.beginPath();
         for (let i = 0, r = this.circleR; i < this.initCircleCoordinate.length; i++) {
             this.context.moveTo(this.initCircleCoordinate[i].x + r, this.initCircleCoordinate[i].y);
@@ -168,7 +178,7 @@ class GesturePassword {
         this.context.stroke();
         this.context.closePath();
         // 绘制连线
-        this.context.strokeStyle = "#0089FF";
+        this.context.strokeStyle = this.lineColor;
         this.context.beginPath();
         for (let i = 0; i < this.selectedCoordinate.length; i++) {
             this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
@@ -176,7 +186,7 @@ class GesturePassword {
         this.context.stroke();
         this.context.closePath();
         // 绘制被选中的点的背景 #D9EDFF
-        this.context.fillStyle = "#D9EDFF";
+        this.context.fillStyle = this.lineBackground;
         this.context.beginPath();
         for (let i = 0; i < this.selectedCoordinate.length; i++) {
             this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
@@ -185,7 +195,7 @@ class GesturePassword {
         this.context.fill();
         this.context.closePath();
         // 绘制被选中的点的中心圆 大小是圆面积的 20/56
-        this.context.fillStyle = "#0089FF";
+        this.context.fillStyle = this.lineColor;
         this.context.beginPath();
         for (let i = 0; i < this.selectedCoordinate.length; i++) {
             this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
@@ -199,7 +209,7 @@ class GesturePassword {
      * 获取点击的位置坐标
      * @param e
      */
-    getPosition(e) {
+    getPosition(e: any) {
         let rect = e.currentTarget.getBoundingClientRect();
         if ('ontouchstart' in document.documentElement) {
             let position = {

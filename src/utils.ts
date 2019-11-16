@@ -5,6 +5,6 @@ const SCALE = ONE_REM / 100;
  * @param {Number} px - 750视觉稿像素
  * @return {Number} 屏幕上实际像素
  */
-export function px2hd(px) {
+export function px2hd(px: number) {
     return Number((px * SCALE).toFixed(1));
 }
