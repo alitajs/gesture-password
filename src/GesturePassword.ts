@@ -8,6 +8,7 @@ interface GesturePasswordProps {
     lineBackground?: string;
     rowPont?: number;
     colPont?: number;
+    onChange: () => {};
 }
 
 interface Coordinate {
@@ -31,9 +32,10 @@ class GesturePassword {
     private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
     private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
     private isActive: boolean; // 是否激活状态
+    private onChange: (data: any) => {}; // 选择完成的响应事件
 
     constructor(props: GesturePasswordProps) {
-        const { id, el, width, height, background = "#FFF", lineColor = "#0089FF", lineBackground = "#D9EDFF", rowPont = 3, colPont = 3, } = props
+        const { id, el, width, height, background = "#FFF", lineColor = "#0089FF", lineBackground = "#D9EDFF", rowPont = 3, colPont = 3, onChange } = props
         this.el = (el || window.document.getElementById(id as string)) as HTMLCanvasElement;
         this.context = (this.el.getContext('2d')) as CanvasRenderingContext2D;
         this.width = width;
@@ -41,6 +43,7 @@ class GesturePassword {
         this.background = background;
         this.lineColor = lineColor;
         this.lineBackground = lineBackground;
+        this.onChange = onChange;
         this.circleR = this.width * 28 / 375;
         if (this.width > this.height) {
             this.circleR = this.height * 28 / 375;
@@ -83,9 +86,9 @@ class GesturePassword {
             if (self.isActive) {
                 self.isActive = false;
                 self.draw();
-                console.log(self.selectedCoordinate)
                 // 这里应该把数据传出去
                 // 重制绘图
+                this.onChange && this.onChange(self.getPassword())
                 self.initCanvas();
             }
         }
@@ -100,6 +103,10 @@ class GesturePassword {
             this.el.addEventListener("mousemove", touchmoveFun, false);
             this.el.addEventListener("mouseup", touchendFun, false)
         }
+    }
+
+    getPassword() {
+        return this.selectedCoordinate.map(i => i.key)
     }
 
     /**
@@ -164,8 +171,6 @@ class GesturePassword {
         this.context.clearRect(0, 0, this.width, this.height);
         // 绘制背景
         this.context.fillStyle = this.background;
-        console.log(this.background);
-
         this.context.fillRect(0, 0, this.width, this.height);
         // 绘制默认圆点
         this.context.lineWidth = 1;
