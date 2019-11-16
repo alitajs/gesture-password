@@ -11,4 +11,5 @@ export default {
       react: 'React',
     },
   },
+  disableTypeCheck: true,
 };
