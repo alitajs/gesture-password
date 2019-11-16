@@ -12,6 +12,19 @@ import GesturePassword from './demo.tsx';
 
 <GesturePassword />
 
+
+```javascript
+import React from 'react';
+import ReactGesturePassword from './ReactGesturePassword';
+export default () => {
+  const config = {
+    width: 375,
+    height: 300,
+  };
+  return <ReactGesturePassword {...config} />;
+};
+```
+
 ## React 组件
 
 ## 参数
@@ -72,14 +85,3 @@ import GesturePassword from './demo.tsx';
 
 - 默认值：3
 
-```javascript
-import React from 'react';
-import ReactGesturePassword from './ReactGesturePassword';
-export default () => {
-  const config = {
-    width: 375,
-    height: 300,
-  };
-  return <ReactGesturePassword {...config} />;
-};
-```

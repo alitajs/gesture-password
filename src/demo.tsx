@@ -4,7 +4,6 @@ export default () => {
   const config = {
     width: 375,
     height: 300,
-    rowPont: 4,
   };
   return <ReactGesturePassword {...config} />;
 };
