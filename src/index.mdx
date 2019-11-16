@@ -1,0 +1,88 @@
+---
+title: Gesture Password
+route: /
+# scri<script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+---
+<script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+import GesturePassword from './demo.tsx';
+
+# Gesture Password
+
+<GesturePassword />
+
+## React 组件
+
+## 参数(借鉴 f2 的文档)
+
+### `id`
+
+- 参数类型：String
+
+- 描述：指定对应 canvas 的 id
+
+- 默认值：null
+
+
+### `el`
+
+- 参数类型：HTMLElement
+
+- 描述：如果未指定 id 时可以直接传入 canvas 对象
+
+- 默认值：null
+
+
+```javascript
+const chart = new F2.Chart({
+  el: document.getElementById('c1')
+});
+```
+
+### `context`
+
+- 参数类型：CanvasRenderingContext2D
+
+- 描述：canvas 的上下文，F2 3.0.1 版本开始支持。
+
+- 默认值：null
+
+
+```javascript
+const chart = new F2.Chart({
+  context: document.getElementById('c1').getContext('2d')
+});
+```
+
+**说明：`id`、`el`、`context` 这三个属性必须设置一个。**
+
+### `width`
+
+- 参数类型：Number
+
+- 描述：图表的宽度，如果 `<canvas>` 元素上设置了宽度，可以不传入
+
+- 默认值：null
+
+
+### `height`
+
+- 参数类型：Number
+
+- 描述：图表的高度，如果 `<canvas>` 元素上设置了高度，可以不传入
+
+- 默认值：null
+
+
+```javascript
+// 默认使用 canvas 元素的宽高
+const chart = new F2.Chart({
+  id: 'c1'
+});
+
+const chart = new F2.Chart({
+  id: 'c1',
+  width: 500,
+  height: 300
+});
+```
+

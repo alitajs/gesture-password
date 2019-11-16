@@ -1,0 +1,39 @@
+{
+  "name": "gesture-password",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "unpkg": "./dist/index.umd.js",
+  "scripts": {
+    "doc:dev": "father doc dev",
+    "doc:build": "father doc build",
+    "build": "father build",
+    "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alitajs/react-gesture-password.git"
+  },
+  "keywords": [
+    "react",
+    "gesture",
+    "password",
+    "gesture password"
+  ],
+  "author": "xiaohuoni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alitajs/react-gesture-password/issues"
+  },
+  "homepage": "https://github.com/alitajs/react-gesture-password#readme",
+  "devDependencies": {
+    "father": "^2.24.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.5"
+  },
+  "files": [
+    "dist"
+  ]
+}
