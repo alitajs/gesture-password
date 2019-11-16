@@ -5,6 +5,11 @@ import { px2hd } from './utils';
 export interface ReactGesturePasswordProps {
   width: number;
   height: number;
+  background?: string;
+  lineColor?: string;
+  lineBackground?: string;
+  rowPont?: number;
+  colPont?: number;
 }
 
 export default class ReactGesturePassword extends React.Component<ReactGesturePasswordProps, any> {
