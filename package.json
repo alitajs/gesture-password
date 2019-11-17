@@ -1,6 +1,6 @@
 {
   "name": "gesture-password",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -8,8 +8,7 @@
   "scripts": {
     "doc:dev": "father doc dev",
     "doc:build": "father doc build",
-    "build": "father build",
-    "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish"
+    "build": "father build"
   },
   "repository": {
     "type": "git",
