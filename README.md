@@ -74,3 +74,18 @@ export default () => {
 
 - 默认值：3
 
+## JavaScript 示例
+
+```javascript
+import { GesturePassword } from 'gesture-password';
+const config = {
+  id:'gesture',
+  width: 375,
+  height: 300,
+  onChange: (data: any) => console.log(data),
+}
+const canvas = new GesturePassword(config)
+<canvas id='gesture' />
+```
+
+> 请注意 import 的时候的大括号，默认导出的是 React 组件
