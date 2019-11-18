@@ -2652,8 +2652,9 @@
     tsutils "^3.17.1"
 
 "@typescript-eslint/typescript-estree@2.7.1-alpha.10+e2008e38":
-  version "2.7.1-alpha.8"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.7.1-alpha.8.tgz#95b54c33d5db6cdb2bf1cf78ddefe122a513e05a"
+  version "2.7.1-alpha.10"
+  resolved "https://registry.npm.taobao.org/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-2.7.1-alpha.10.tgz?cache=0&sync_timestamp=1573869417385&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Ftypescript-estree%2Fdownload%2F%40typescript-eslint%2Ftypescript-estree-2.7.1-alpha.10.tgz#3deb1ad48f0a2980eb01d534fbd6a3cfe413d9a1"
+  integrity sha1-Pesa1I8KKYDrAdU0+9ajz+QT2aE=
   dependencies:
     debug "^4.1.1"
     eslint-visitor-keys "^1.1.0"

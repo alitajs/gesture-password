@@ -6,5 +6,9 @@ export default () => {
     height: 300,
     onChange: (data: any) => console.log(data),
   };
-  return <ReactGesturePassword {...config} />;
+  return (
+    <div>
+      <ReactGesturePassword {...config} />
+    </div>
+  );
 };

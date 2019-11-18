@@ -29,10 +29,12 @@ class GesturePassword {
     private rowPont: number; // 一行有几个圆
     private colPont: number; // 一列有几个圆
     private initCircleCoordinate: Coordinate[] = []; // 圆的初始化坐标
-    private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
-    private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
+    private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标 已经选中的
+    private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标 未选中的
     private isActive: boolean; // 是否激活状态
+    private prevCoordinate: Coordinate = { x: 0, y: 0 };// 选中的上一个点
     private onChange: (data: any) => {}; // 选择完成的响应事件
+
 
     constructor(props: GesturePasswordProps) {
         const { id, el, width, height, background = "#FFF", lineColor = "#0089FF", lineBackground = "#D9EDFF", rowPont = 3, colPont = 3, onChange } = props
@@ -55,11 +57,12 @@ class GesturePassword {
     }
     initCanvas() {
         this.initCircleCoordinate = this.getCircleCoordinate();
-        this.candidateCoordinate = this.initCircleCoordinate;
+        this.candidateCoordinate = [...this.initCircleCoordinate];
         this.selectedCoordinate = [];
         this.draw();
         this.addEventListener();
     }
+
 
     addEventListener() {
         let self = this;
@@ -71,8 +74,14 @@ class GesturePassword {
                 if (self.collisionDetection(po, self.candidateCoordinate[i])) {
                     self.isActive = true;
                     self.selectedCoordinate.push(self.candidateCoordinate[i]);
+                    this.drawBg(self.candidateCoordinate[i])
+                    this.drawSmallCircle(self.candidateCoordinate[i])
+                    self.prevCoordinate = self.candidateCoordinate[i]
+                    console.log(self.prevCoordinate.key)
                     self.candidateCoordinate.splice(i, 1);
-                    self.draw(); // 碰撞检测通过需要重绘canvans
+
+                    // self.draw(); // 碰撞检测通过需要重绘canvans
+
                     break;
                 }
             }
@@ -114,18 +123,23 @@ class GesturePassword {
      * @param po 更新画布
      */
     update(po: Coordinate) {
-        this.draw();
-        let last = this.selectedCoordinate[this.selectedCoordinate.length - 1];
-        this.context.beginPath();
-        this.context.moveTo(po.x, po.y);
-        this.context.lineTo(last.x, last.y);
-        this.context.closePath();
-        this.context.stroke();
+        // this.draw();
+        // let last = this.selectedCoordinate[this.selectedCoordinate.length - 1];
+        // this.context.beginPath();
+        // this.context.moveTo(po.x, po.y);
+        // this.context.lineTo(last.x, last.y);
+        // this.context.closePath();
+        // this.context.stroke();
         // 滑动经过圆点
         for (let i = 0; i < this.candidateCoordinate.length; i++) {
             if (this.collisionDetection(po, this.candidateCoordinate[i])) {
                 this.isActive = true;
                 this.selectedCoordinate.push(this.candidateCoordinate[i]);
+                this.drawLine(this.candidateCoordinate[i])
+                this.drawBg(this.candidateCoordinate[i])
+                console.log(this.selectedCoordinate)
+                this.drawSmallCircle(this.candidateCoordinate[i])
+                this.prevCoordinate = this.candidateCoordinate[i]
                 this.candidateCoordinate.splice(i, 1);
                 break;
             }
@@ -148,16 +162,25 @@ class GesturePassword {
      * 获取点的坐标
      */
     getCircleCoordinate() {
+        // this.width = 375
+        // this.height = 300
+        // (宽高 - 圆的个数乘以直径) / (圆的个数 + 1)
         const offsetx = (this.width - this.rowPont * this.circleR * 2) / (this.rowPont + 1);
         const offsety = (this.height - this.rowPont * this.circleR * 2) / (this.colPont + 1);
+        // offsetx = 60.15
+        // offsety = 41.40
+        console.log(offsetx)
+        console.log(offsety)
         let circleCoordinate: Coordinate[] = [];
         for (let col = 0; col < this.colPont; col++) {
             for (let row = 0; row < this.rowPont; row++) {
                 circleCoordinate.push({
+                    // 1个半径 3个半径 5个半径…… this.circleR * (2 * row + 1),
                     x: offsetx * (row + 1) + this.circleR * (2 * row + 1),
                     y: offsety * (col + 1) + this.circleR * (2 * col + 1),
                     key: 3 * col + row + 1
                 });
+                // console.log(circleCoordinate[circleCoordinate.length-1])
             }
         }
         return circleCoordinate;
@@ -183,29 +206,58 @@ class GesturePassword {
         this.context.stroke();
         this.context.closePath();
         // 绘制连线
+        // this.context.strokeStyle = this.lineColor;
+        // this.context.beginPath();
+        // for (let i = 0; i < this.selectedCoordinate.length; i++) {
+        //     this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
+        // }
+        // this.context.stroke();
+        // this.context.closePath();
+        // 绘制被选中的点的背景 #D9EDFF
+        // this.context.fillStyle = this.lineBackground;
+        // this.context.beginPath();
+        // for (let i = 0; i < this.selectedCoordinate.length; i++) {
+        //     this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
+        //     this.context.arc(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y, this.circleR, 0, Math.PI * 2, true);
+        // }
+        // this.context.fill();
+        // this.context.closePath();
+        // 绘制被选中的点的中心圆 大小是圆面积的 20/56
+        // this.context.fillStyle = this.lineColor;
+        // this.context.beginPath();
+        // for (let i = 0; i < this.selectedCoordinate.length; i++) {
+        //     this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
+        //     this.context.arc(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y, this.circleR * 20 / 56, 0, Math.PI * 2, true);
+        // }
+        // this.context.fill();
+        // this.context.closePath();
+    }
+
+    drawLine(coordinate: Coordinate) {
+        console.log(this.prevCoordinate.key);
+        console.log(coordinate.key)
+
         this.context.strokeStyle = this.lineColor;
         this.context.beginPath();
-        for (let i = 0; i < this.selectedCoordinate.length; i++) {
-            this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
-        }
+        this.context.moveTo(this.prevCoordinate.x, this.prevCoordinate.y)
+        this.context.lineTo(coordinate.x, coordinate.y);
         this.context.stroke();
         this.context.closePath();
-        // 绘制被选中的点的背景 #D9EDFF
+    }
+    drawBg(coordinate: Coordinate) {
         this.context.fillStyle = this.lineBackground;
         this.context.beginPath();
-        for (let i = 0; i < this.selectedCoordinate.length; i++) {
-            this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
-            this.context.arc(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y, this.circleR, 0, Math.PI * 2, true);
-        }
+        this.context.moveTo(coordinate.x + this.circleR / 2, coordinate.y);
+        this.context.arc(coordinate.x, coordinate.y, this.circleR, 0, Math.PI * 2, true);
         this.context.fill();
         this.context.closePath();
-        // 绘制被选中的点的中心圆 大小是圆面积的 20/56
+
+    }
+    drawSmallCircle(coordinate: Coordinate) {
         this.context.fillStyle = this.lineColor;
         this.context.beginPath();
-        for (let i = 0; i < this.selectedCoordinate.length; i++) {
-            this.context.moveTo(this.selectedCoordinate[i].x + this.circleR / 2, this.selectedCoordinate[i].y);
-            this.context.arc(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y, this.circleR * 20 / 56, 0, Math.PI * 2, true);
-        }
+        this.context.moveTo(coordinate.x + this.circleR / 2, coordinate.y);
+        this.context.arc(coordinate.x, coordinate.y, this.circleR * 20 / 56, 0, Math.PI * 2, true);
         this.context.fill();
         this.context.closePath();
     }
