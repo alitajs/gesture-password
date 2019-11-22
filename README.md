@@ -18,7 +18,7 @@ npm install gesture-password --save
 yarn add gesture-password
 ```
 
-## gesture-password Usage
+## gesture-password usage
 
 ```
 import GesturePassword from 'gesture-password';
@@ -36,7 +36,7 @@ const gesturePassword = new GesturePassword(config)
 ```
 
 
-## gesture-password-react Install
+## gesture-password-react install
 
 ```
 // npm
@@ -46,7 +46,7 @@ npm install gesture-password-react --save
 yarn add gesture-password-react
 ```
 
-## gesture-password-react Usage
+## gesture-password-react usage
 
 ```
 import React from 'react';
@@ -61,7 +61,7 @@ export default () => {
 };
 ```
 
-## gesture-password-vue Install
+## gesture-password-vue install
 
 
 ```
@@ -72,7 +72,7 @@ npm install gesture-password --save
 yarn add gesture-password
 ```
 
-## gesture-password-vue Usage
+## gesture-password-vue usage
 
 // main.js registry
 ```
