@@ -1,0 +1,13 @@
+{
+  "name": "pansy",
+  "version": 2,
+  "builds": [
+    {
+      "src": "build.sh",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "public"
+      }
+    }
+  ]
+}

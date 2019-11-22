@@ -1,33 +1,35 @@
----
-title: Gesture Password
-route: /
-# scri<script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
----
 
-<script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
 
-import GesturePassword from './demo.tsx';
+<h1 align="center">
+  Gesture Password (手势密码)
+</h1>
 
-# Gesture Password
+<img height="300" src="https://user-images.githubusercontent.com/11746742/68995608-735b4a00-08ca-11ea-8402-2d5229beaceb.png"></img>
 
-<GesturePassword />
+## gesture-password-react install
 
-## React 示例
+```
+// npm
+npm install gesture-password-react --save
 
-```javascript
+// yarn
+yarn add gesture-password-react
+```
+
+## gesture-password-react usage
+
+```
 import React from 'react';
-import GesturePassword from 'gesture-password';
+import GesturePassword from 'gesture-password-react';
 export default () => {
   const config = {
     width: 375,
     height: 300,
-    onChange: (data: any) => console.log(data),
+    onChange: (data: any) => console.log(data) // get gesture password
   };
   return <GesturePassword {...config} />;
 };
 ```
-
-## React 组件
 
 ## 参数
 
@@ -86,19 +88,3 @@ export default () => {
 - 描述：写明一列有几个圆点，可以不传
 
 - 默认值：3
-
-## JavaScript 示例
-
-```javascript
-import { GesturePassword } from 'gesture-password';
-const config = {
-  id:'gesture',
-  width: 375,
-  height: 300,
-  onChange: (data: any) => console.log(data),
-}
-const canvas = new GesturePassword(config)
-<canvas id='gesture' />
-```
-
-> 请注意 import 的时候的大括号，默认导出的是 React 组件

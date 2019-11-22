@@ -1,65 +1,9 @@
+
 <h1 align="center">
   Gesture Password (手势密码)
 </h1>
 
-<div align="center">
 <img height="300" src="https://user-images.githubusercontent.com/11746742/68995608-735b4a00-08ca-11ea-8402-2d5229beaceb.png"></img>
-</div>
-
-## The gesture password repo contains three packages: gesture-password (native version), gesture-password-react (react version), and gesture-password-vue (vue version). You can install the corresponding version as required
-
-## gesture-password Install
-
-```
-// npm
-npm install gesture-password --save
-
-// yarn
-yarn add gesture-password
-```
-
-## gesture-password usage
-
-```
-import GesturePassword from 'gesture-password';
-
-const config = {
-  id:'gesture',
-  width: 375,
-  height: 300,
-  onChange: (data: any) => console.log(data) // get gesture password
-}
-
-const gesturePassword = new GesturePassword(config)
-
-<canvas id='gesture' />
-```
-
-
-## gesture-password-react install
-
-```
-// npm
-npm install gesture-password-react --save
-
-// yarn
-yarn add gesture-password-react
-```
-
-## gesture-password-react usage
-
-```
-import React from 'react';
-import GesturePassword from 'gesture-password-react';
-export default () => {
-  const config = {
-    width: 375,
-    height: 300,
-    onChange: (data: any) => console.log(data) // get gesture password
-  };
-  return <GesturePassword {...config} />;
-};
-```
 
 ## gesture-password-vue install
 
@@ -127,6 +71,8 @@ export default {
   }
 };
 </script>
+
+
 ```
 
 ## 参数
