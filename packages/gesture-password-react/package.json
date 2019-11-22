@@ -1,0 +1,28 @@
+{
+  "name": "gesture-password-react",
+  "version": "1.0.0",
+  "description": "GesturePassword react component",
+  "author": "Alita Team",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/indexd.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node ../../node_modules/@walrus/pansy/dist/cli.js"
+  },
+  "peerDependencies": {
+    "react": "^16.8.5"
+  },
+  "dependencies": {
+    "gesture-password": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.11",
+    "react": "^16.12.0"
+  }
+}

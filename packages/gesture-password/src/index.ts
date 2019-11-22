@@ -1,38 +1,40 @@
+export * from './utils'
+
 interface GesturePasswordProps {
-    id?: string;
-    el?: HTMLElement;
-    width: number;
-    height: number;
-    background?: string;
-    lineColor?: string;
-    lineBackground?: string;
-    rowPont?: number;
-    colPont?: number;
-    onChange: () => {};
+  id?: string;
+  el?: HTMLElement;
+  width: number;
+  height: number;
+  background?: string;
+  lineColor?: string;
+  lineBackground?: string;
+  rowPont?: number;
+  colPont?: number;
+  onChange: () => {};
 }
 
 interface Coordinate {
-    x: number;
-    y: number;
-    key?: number;
+  x: number;
+  y: number;
+  key?: number;
 }
 
 class GesturePassword {
-    private el: HTMLCanvasElement;
-    private context: CanvasRenderingContext2D;
-    private width: number; // 画布的宽
-    private height: number; // 画布的高
-    private background: string; // 背景颜色
-    private lineColor: string; // 线颜色
-    private lineBackground: string; // 线背景颜色
-    private circleR: number; // 圆的半径
-    private rowPont: number; // 一行有几个圆
-    private colPont: number; // 一列有几个圆
-    private initCircleCoordinate: Coordinate[] = []; // 圆的初始化坐标
-    private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
-    private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
-    private isActive: boolean; // 是否激活状态
-    private onChange: (data: any) => {}; // 选择完成的响应事件
+  private el: HTMLCanvasElement;
+  private context: CanvasRenderingContext2D;
+  private width: number; // 画布的宽
+  private height: number; // 画布的高
+  private background: string; // 背景颜色
+  private lineColor: string; // 线颜色
+  private lineBackground: string; // 线背景颜色
+  private circleR: number; // 圆的半径
+  private rowPont: number; // 一行有几个圆
+  private colPont: number; // 一列有几个圆
+  private initCircleCoordinate: Coordinate[] = []; // 圆的初始化坐标
+  private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
+  private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
+  private isActive: boolean; // 是否激活状态
+  private onChange: (data: any) => {}; // 选择完成的响应事件
 
     constructor(props: GesturePasswordProps) {
         const { id, el, width, height, background = "#FFF", lineColor = "#0089FF", lineBackground = "#D9EDFF", rowPont = 3, colPont = 3, onChange } = props

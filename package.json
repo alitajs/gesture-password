@@ -1,38 +1,32 @@
 {
-  "name": "gesture-password",
-  "version": "1.1.1",
-  "description": "",
-  "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
-  "unpkg": "./dist/index.umd.js",
+  "name": "@alitajs/workspace",
+  "private": true,
   "scripts": {
-    "doc:dev": "father doc dev",
-    "doc:build": "father doc build",
-    "build": "father build"
+    "bootstrap": "yarn && lerna bootstrap",
+    "clean": "lerna clean",
+    "publish": "lerna publish",
+    "build": "lerna run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alitajs/react-gesture-password.git"
-  },
-  "keywords": [
-    "react",
-    "gesture",
-    "password",
-    "gesture password"
-  ],
-  "author": "xiaohuoni",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alitajs/react-gesture-password/issues"
-  },
-  "homepage": "https://github.com/alitajs/react-gesture-password#readme",
   "devDependencies": {
-    "father": "^2.24.1"
+    "@walrus/pansy": "^0.2.3",
+    "lerna": "^3.18.4",
+    "lerna-changelog": "^0.8.3",
+    "typescript": "^3.7.2"
   },
-  "peerDependencies": {
-    "react": "^16.8.5"
+  "changelog": {
+    "repo": "alitajs/gesture-password",
+    "labels": {
+      "PR: New Feature": ":rocket: New Features",
+      "PR: Breaking Change": ":boom: Breaking Changes",
+      "PR: Bug Fix": ":bug: Bug Fix",
+      "PR: Documentation": ":memo: Documentation",
+      "PR: Internal": ":house: Internal",
+      "PR: Underlying Tools": ":hammer: Underlying Tools"
+    },
+    "cacheDir": ".changelog"
   },
-  "files": [
-    "dist"
+  "workspaces": [
+    "packages/*"
   ]
 }

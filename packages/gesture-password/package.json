@@ -1,0 +1,18 @@
+{
+  "name": "gesture-password",
+  "version": "1.0.0",
+  "description": "Gesture password(手势密码)",
+  "author": "Alita Team",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node ../../node_modules/@walrus/pansy/dist/cli.js"
+  }
+}
