@@ -66,7 +66,7 @@ export default () => {
 
 ```
 // npm
-npm install gesture-password --save
+npm install gesture-password-vue --save
 
 // yarn
 yarn add gesture-password
