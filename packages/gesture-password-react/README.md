@@ -30,3 +30,61 @@ export default () => {
   return <GesturePassword {...config} />;
 };
 ```
+
+## 参数
+
+### `width`
+
+- 参数类型：Number
+
+- 描述：绘图的宽度，移动端会自动适配，请写明 iphone6 下的尺寸即可
+
+- 默认值：null
+
+### `height`
+
+- 参数类型：Number
+
+- 描述：绘图的高度，移动端会自动适配，请写明 iphone6 下的尺寸即可
+
+- 默认值：null
+
+### `background`
+
+- 参数类型：String
+
+- 描述：图表的背景颜色，可以不传
+
+- 默认值：#FFF
+
+### `lineColor`
+
+- 参数类型：String
+
+- 描述：图表的绘制线的颜色，可以不传
+
+- 默认值：#0089FF
+
+### `lineBackground`
+
+- 参数类型：String
+
+- 描述：图表的选中圆的背景颜色，可以不传
+
+- 默认值：#D9EDFF
+
+### `rowPont`
+
+- 参数类型：Number
+
+- 描述：写明一行有几个圆点，可以不传
+
+- 默认值：3
+
+### `colPont`
+
+- 参数类型：Number
+
+- 描述：写明一列有几个圆点，可以不传
+
+- 默认值：3
