@@ -8,3 +8,5 @@ sidebar: auto
 ## 基本使用
 
 <Basic />
+
+<<< ./docs/.vuepress/components/Basic.vue{highlightLines}

@@ -8,7 +8,7 @@ module.exports = (ctx) => ({
     smoothScroll: true,
     nav: [
       {
-        text: '文档',
+        text: '指南',
         link: '/guide/'
       },
       {
