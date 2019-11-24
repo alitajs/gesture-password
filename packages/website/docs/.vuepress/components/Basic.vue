@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import GesturePassword from 'gesture-password-vue';
+import GesturePassword from '@alitajs/gesture-password-vue';
 
 export default {
   name: 'Basic',
