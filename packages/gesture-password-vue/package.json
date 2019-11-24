@@ -16,7 +16,7 @@
     "build": "node ../../node_modules/@walrus/pansy/dist/cli.js"
   },
   "dependencies": {
-    "gesture-password": "^1.0.0"
+    "@alitajs/gesture-password": "^1.0.0"
   },
   "devDependencies": {
     "rollup-plugin-vue": "5.1.1",

@@ -19,7 +19,7 @@
     "react": "^16.8.5"
   },
   "dependencies": {
-    "gesture-password": "^1.0.0"
+    "@alitajs/gesture-password": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.11",

@@ -10,7 +10,7 @@
     "build:web": "vuepress build docs"
   },
   "dependencies": {
-    "gesture-password-vue": "^1.0.0"
+    "@alitajs/gesture-password-vue": "^1.0.0"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.2.0",
