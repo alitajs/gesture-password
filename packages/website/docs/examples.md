@@ -6,7 +6,3 @@ sidebar: auto
 # 使用示例
 
 ## 基本使用
-
-<ClientOnly>
-  <Basic />
-</ClientOnly>
