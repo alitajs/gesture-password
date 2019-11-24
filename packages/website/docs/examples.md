@@ -7,4 +7,6 @@ sidebar: auto
 
 ## 基本使用
 
-<Basic />
+<ClientOnly>
+  <Basic />
+</ClientOnly>
