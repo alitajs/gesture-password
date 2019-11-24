@@ -1,5 +1,5 @@
 {
-  "name": "gesture-password-vue",
+  "name": "@alitajs/gesture-password-vue",
   "version": "1.0.0",
   "description": "GesturePassword vue component",
   "author": "Alita Team",
@@ -24,7 +24,6 @@
     "vue-template-compiler": "^2.6.10"
   },
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/",
     "access": "public"
   }
 }
