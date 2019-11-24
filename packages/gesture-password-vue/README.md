@@ -7,38 +7,37 @@
 
 ## gesture-password-vue install
 
-
 ```
 // npm
-npm install gesture-password --save
+npm install gesture-password-vue --save
 
 // yarn
-yarn add gesture-password
+yarn add gesture-password-vue
 ```
 
 ## gesture-password-vue usage
 
 // main.js registry
 ```
-import Vue from 'vue'
-import GesturePassword from 'gesture-password-vue'
+import Vue from 'vue';
+import GesturePassword from 'gesture-password-vue';
  
-Vue.use(GesturePassword)
+Vue.use(GesturePassword);
 
 <template>
-  <GesturePassword :rowPont='rowPont' :width='width' :height='height' @onChange="onChange" />
+  <GesturePassword :width='width' :height='height' @onChange="onChange" />
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-       {
-        width: 375,
-        height: 300,
-        onChange: function(data){
-          console.log(data) // get gesture password
-        }
+      width: 375,
+      height: 300,
+      onChange: function(data){
+        console.log(data) // get gesture password
+      }
     };
   }
 };
@@ -54,7 +53,7 @@ export default {
 </template>
 
 <script>
-import GesturePassword from 'gesture-password-vue'
+import GesturePassword from 'gesture-password-vue';
 export default {
   components: {
     GesturePassword
@@ -71,7 +70,6 @@ export default {
   }
 };
 </script>
-
 
 ```
 

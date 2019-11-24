@@ -12,6 +12,10 @@ module.exports = (ctx) => ({
         link: '/guide/'
       },
       {
+        text: '示例',
+        link: '/examples/'
+      },
+      {
         text: 'GitHub',
         link: 'https://github.com/alitajs/gesture-password'
       }
