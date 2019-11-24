@@ -3,7 +3,7 @@
 cd ./packages/website
 
 yarn
-yarn build
+yarn build:web
 
 cd ../../
 

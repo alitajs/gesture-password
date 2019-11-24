@@ -5,26 +5,18 @@
     "bootstrap": "yarn && lerna bootstrap",
     "clean": "lerna clean",
     "publish": "lerna publish",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "prerelease": "yarn build",
+    "release": "yarn --pure-lockfile && walrus release"
   },
   "license": "MIT",
   "devDependencies": {
+    "@walrus/cli": "^0.3.1",
     "@walrus/pansy": "^0.2.3",
+    "@walrus/plugin-lerna-release": "^1.0.3",
     "lerna": "^3.18.4",
     "lerna-changelog": "^0.8.3",
     "typescript": "^3.7.2"
-  },
-  "changelog": {
-    "repo": "alitajs/gesture-password",
-    "labels": {
-      "PR: New Feature": ":rocket: New Features",
-      "PR: Breaking Change": ":boom: Breaking Changes",
-      "PR: Bug Fix": ":bug: Bug Fix",
-      "PR: Documentation": ":memo: Documentation",
-      "PR: Internal": ":house: Internal",
-      "PR: Underlying Tools": ":hammer: Underlying Tools"
-    },
-    "cacheDir": ".changelog"
   },
   "workspaces": [
     "packages/*"
