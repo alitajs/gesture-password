@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+yarn bootstrap
+
 cd ./packages/website
 
-yarn
 yarn build:web
 
 cd ../../
