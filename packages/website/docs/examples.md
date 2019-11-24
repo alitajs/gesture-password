@@ -9,4 +9,4 @@ sidebar: auto
 
 <Basic />
 
-<<< ./docs/.vuepress/components/Basic.vue{highlightLines}
+<<< ./docs/.vuepress/components/Basic.vue
