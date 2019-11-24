@@ -1,6 +1,6 @@
 {
-  "name": "gesture-password",
-  "version": "1.0.0",
+  "name": "@alitajs/gesture-password",
+  "version": "1.0.1",
   "description": "Gesture password(手势密码)",
   "author": "Alita Team",
   "license": "MIT",
@@ -14,5 +14,8 @@
   ],
   "scripts": {
     "build": "node ../../node_modules/@walrus/pansy/dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

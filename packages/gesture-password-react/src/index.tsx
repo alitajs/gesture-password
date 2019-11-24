@@ -1,5 +1,5 @@
 import React from 'react';
-import GesturePassword, { px2hd } from 'gesture-password';
+import GesturePassword, { px2hd } from '@alitajs/gesture-password';
 
 export interface ReactGesturePasswordProps {
   width: number;

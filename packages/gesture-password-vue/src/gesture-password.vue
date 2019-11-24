@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import GesturePassword, { px2hd } from 'gesture-password';
+import GesturePassword, { px2hd } from '@alitajs/gesture-password';
 
 export default {
   name: 'VueGesturePassword',

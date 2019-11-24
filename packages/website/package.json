@@ -1,16 +1,16 @@
 {
   "name": "gesture-password-docs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "gesture password docs",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build:web": "vuepress build docs"
   },
   "dependencies": {
-    "gesture-password-vue": "^1.0.0"
+    "@alitajs/gesture-password-vue": "^1.0.1"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.2.0",

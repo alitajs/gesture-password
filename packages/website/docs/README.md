@@ -1,6 +1,6 @@
 ---
 home: true
-actionText: 文档
+actionText: 指南
 actionLink: /guide/
 footer: MIT Licensed | Copyright © 2019 Alitajs
 ---
@@ -10,20 +10,17 @@ footer: MIT Licensed | Copyright © 2019 Alitajs
 - 💻 使用 TypeScript 编写，提供完善的类型定义
 - 🚀 小巧，不到10K大小，Gzip压缩后不到3K
 - 📦 提供`cjs`、`es`、`umd`三种格式
+- 🎉 提供`Vue`、`React`组件包
 
-## 安装
+## 像数 1, 2, 3 一样容易
 
 ```
-// npm
-npm install gesture-password --save
-
-// yarn 推荐
+# 安装
 yarn add gesture-password
 ```
 
-## 使用
-
 ```
+// index.js 需要编译
 import GesturePassword from 'gesture-password';
 
 const config = {
@@ -33,7 +30,20 @@ const config = {
   onChange: (data) => console.log(data) // get gesture password
 }
 
-const gesturePassword = new GesturePassword(config)
+new GesturePassword(config)
 
-<canvas id='gesture' />
+// index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Example</title>
+</head>
+<body>
+  <canvas id='gesture' />
+  <script src="./index.js"></script>
+</body>
+</html>
 ```
