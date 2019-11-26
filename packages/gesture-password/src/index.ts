@@ -10,7 +10,7 @@ interface GesturePasswordProps {
   lineBackground?: string;
   rowPont?: number;
   colPont?: number;
-  onChange: () => {};
+  onChange?: (values: number[]) => {};
 }
 
 interface Coordinate {

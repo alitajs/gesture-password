@@ -19,7 +19,8 @@
     "typescript": "^3.7.2"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "engines": {
     "node": ">=10.9.0",

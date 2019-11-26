@@ -1,0 +1,22 @@
+{
+  "name": "example-react",
+  "version": "1.0.0",
+  "description": "react example",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "umi dev"
+  },
+  "dependencies": {
+    "@alitajs/gesture-password-react": "^1.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "typescript": "^3.7.2",
+    "umi": "^2.12.2",
+    "umi-plugin-react": "^1.14.5"
+  }
+}
