@@ -1,6 +1,8 @@
-const config = {
+import { Config } from '@walrus/types';
+
+const config: Config = {
   plugins: {
-    'lerna-release': true
+    release: true
   }
 };
 
