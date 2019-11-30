@@ -6,17 +6,28 @@
     "clean": "lerna clean",
     "publish": "lerna publish",
     "build": "lerna run build",
+    "test": "walrus test",
+    "prettier": "walrus prettier",
+    "lint": "walrus lint",
+    "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
     "prerelease": "yarn build",
     "release": "yarn --pure-lockfile && walrus release"
   },
   "license": "MIT",
   "devDependencies": {
-    "@walrus/cli": "^0.3.1",
+    "@walrus/cli": "^0.4.1",
     "@walrus/pansy": "^0.2.3",
-    "@walrus/plugin-lerna-release": "^1.0.3",
+    "@walrus/plugin-release": "^1.1.0",
+    "husky": "^3.1.0",
     "lerna": "^3.18.4",
     "lerna-changelog": "^0.8.3",
     "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn prettier",
+      "commit-msg": "yarn lint:commit"
+    }
   },
   "workspaces": [
     "packages/*",
