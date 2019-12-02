@@ -1,16 +1,12 @@
 <template>
-  <canvas
-  ref='canvasRef'
-  :width='px2hdWidth'
-  :height='px2hdWidth'
-  ></canvas>
+  <canvas ref="canvasRef" :width="px2hdWidth" :height="px2hdWidth"></canvas>
 </template>
 
 <script>
 import GesturePassword, { px2hd } from '@alitajs/gesture-password';
 
 export default {
-  name: 'VueGesturePassword',
+  name: 'GesturePassword',
   props: {
     width: {
       type: Number,
@@ -30,14 +26,14 @@ export default {
     return {
       canvas: null,
       el: null
-    }
+    };
   },
   computed: {
-    px2hdHeight: function () {
-      return px2hd(this.height)
+    px2hdHeight: function() {
+      return px2hd(this.height);
     },
-    px2hdWidth: function () {
-      return px2hd(this.width)
+    px2hdWidth: function() {
+      return px2hd(this.width);
     }
   },
   mounted() {
@@ -57,7 +53,7 @@ export default {
   methods: {
     createCanvasInstance(props) {
       if (!this.canvas) {
-        const mergeProps = {...props,onChange:this.$listeners.onChange}
+        const mergeProps = { ...props, onChange: this.$listeners.onChange };
         this.canvas = new GesturePassword({ ...mergeProps, el: this.el });
       }
     },
@@ -66,6 +62,6 @@ export default {
         this.el = this.$refs.canvasRef;
       }
     }
-  },
-}
+  }
+};
 </script>
