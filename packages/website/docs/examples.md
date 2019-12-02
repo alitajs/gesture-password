@@ -58,7 +58,7 @@ export default {
 // Component registry
 
 <template>
-  <GesturePassword :rowPont='rowPont' :width='width' :height='height' @onChange="onChange" />
+  <GesturePassword  :width='width' :height='height' @onChange="onChange" />
 </template>
 
 <script>
