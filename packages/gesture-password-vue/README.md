@@ -1,4 +1,3 @@
-
 <h1 align="center">
   Gesture Password (手势密码)
 </h1>
@@ -18,10 +17,11 @@ yarn add @alitajs/gesture-password-vue
 ## usage
 
 // main.js registry
+
 ```
 import Vue from 'vue';
 import GesturePassword from '@alitajs/gesture-password-vue';
- 
+
 Vue.use(GesturePassword);
 
 <template>
@@ -45,13 +45,14 @@ export default {
 ```
 
 // Component registry
+
 ```
 <template>
-  <GesturePassword :rowPont='rowPont' :width='width' :height='height' @onChange="onChange" />
+  <GesturePassword  :width='width' :height='height' @onChange="onChange" />
 </template>
 
 <script>
-import GesturePassword from 'gesture-password-vue';
+import GesturePassword from '@alitajs/gesture-password-vue';
 export default {
   components: {
     GesturePassword
