@@ -2,6 +2,7 @@
   "name": "example-react",
   "version": "1.0.0",
   "description": "react example",
+  "private": true,
   "main": "index.js",
   "license": "MIT",
   "scripts": {
