@@ -1,14 +1,15 @@
 {
   "name": "example-react",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "react example",
+  "private": true,
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "umi dev"
   },
   "dependencies": {
-    "@alitajs/gesture-password-react": "^1.0.1",
+    "@alitajs/gesture-password-react": "^1.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

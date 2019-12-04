@@ -1,10 +1,9 @@
 {
   "name": "example-vue",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "start": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
