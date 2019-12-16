@@ -21,7 +21,12 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
 
   createCanvasInstance(props: ReactGesturePasswordProps) {
     if (!this.canvas) {
-      this.canvas = new GesturePassword({ ...props, el: this.el });
+      this.canvas = new GesturePassword({
+        ...props,
+        el: this.el,
+        width: px2hd(props.width),
+        height: px2hd(props.height)
+      });
     }
   }
 
@@ -50,6 +55,12 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
   };
 
   render() {
-    return <canvas ref={this.portalRef} width={px2hd(this.props.width)} height={px2hd(this.props.height)}></canvas>;
+    return (
+      <canvas
+        ref={this.portalRef}
+        width={px2hd(this.props.width)}
+        height={px2hd(this.props.height)}
+      ></canvas>
+    );
   }
 }

@@ -53,7 +53,12 @@ export default {
   methods: {
     createCanvasInstance(props) {
       if (!this.canvas) {
-        const mergeProps = { ...props, onChange: this.$listeners.onChange };
+        const mergeProps = {
+          ...props,
+          width: px2hd(props.width),
+          height: px2hd(props.height),
+          onChange: this.$listeners.onChange
+        };
         this.canvas = new GesturePassword({ ...mergeProps, el: this.el });
       }
     },
