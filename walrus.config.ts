@@ -2,7 +2,10 @@ import { Config } from '@walrus/types';
 
 const config: Config = {
   plugins: {
-    release: true
+    release: {
+      mode: 'lerna',
+      organization: 'alitajs'
+    }
   }
 };
 

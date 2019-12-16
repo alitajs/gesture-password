@@ -17,7 +17,7 @@
   "devDependencies": {
     "@walrus/cli": "^0.4.1",
     "@walrus/pansy": "^0.2.3",
-    "@walrus/plugin-release": "^1.1.0",
+    "@walrus/plugin-release": "^1.3.4",
     "husky": "^3.1.0",
     "lerna": "^3.18.4",
     "lerna-changelog": "^0.8.3",
@@ -36,6 +36,5 @@
   "engines": {
     "node": ">=10.9.0",
     "yarn": ">=1.3.2"
-  },
-  "version": null
+  }
 }
