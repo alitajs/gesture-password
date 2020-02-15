@@ -74,6 +74,34 @@ class GesturePassword {
     this.colPont = colPont;
     this.isActive = false;
     this.initCanvas();
+    this.addEventListener();
+  }
+
+  updateProps(props: Omit<GesturePasswordProps, 'el' | 'id'>) {
+    const {
+      width,
+      height,
+      background = '#FFF',
+      lineColor = '#0089FF',
+      lineBackground = '#D9EDFF',
+      rowPont = 3,
+      colPont = 3,
+      onChange = () => {}
+    } = props;
+
+    this.width = width;
+    this.height = height;
+    this.background = background;
+    this.lineColor = lineColor;
+    this.lineBackground = lineBackground;
+    this.onChange = onChange;
+    this.circleR = (this.width * 28) / 375;
+    if (this.width > this.height) {
+      this.circleR = (this.height * 28) / 375;
+    }
+    this.rowPont = rowPont;
+    this.colPont = colPont;
+    this.initCanvas();
   }
 
   initCanvas() {
@@ -81,7 +109,6 @@ class GesturePassword {
     this.candidateCoordinate = this.initCircleCoordinate;
     this.selectedCoordinate = [];
     this.draw();
-    this.addEventListener();
   }
 
   addEventListener() {
@@ -104,10 +131,10 @@ class GesturePassword {
       if (self.isActive) {
         const po = self.getPosition(e);
         if (!po) return;
-        self.update(po);
+        self.updateCanvas(po);
       }
     };
-    const touchendFun = (e: TouchEvent | MouseEvent) => {
+    const touchendFun = (_e: TouchEvent | MouseEvent) => {
       if (self.isActive) {
         self.isActive = false;
         self.draw();
@@ -138,9 +165,9 @@ class GesturePassword {
    *
    * @param po 更新画布
    */
-  update(po: Coordinate) {
+  updateCanvas(po: Coordinate) {
     this.draw();
-    let last = this.selectedCoordinate[this.selectedCoordinate.length - 1];
+    const last = this.selectedCoordinate[this.selectedCoordinate.length - 1];
     this.context.beginPath();
     this.context.moveTo(po.x, po.y);
     this.context.lineTo(last.x, last.y);
