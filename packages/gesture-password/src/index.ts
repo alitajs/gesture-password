@@ -2,7 +2,7 @@ export * from './utils';
 
 interface GesturePasswordProps {
   id?: string;
-  el?: HTMLElement;
+  el?: HTMLCanvasElement;
   width: number;
   height: number;
   background?: string;
@@ -16,7 +16,10 @@ interface GesturePasswordProps {
 interface Coordinate {
   x: number;
   y: number;
-  key?: number;
+}
+
+interface CircleCoordinate extends Coordinate {
+  key: number;
 }
 
 class GesturePassword {
@@ -30,16 +33,15 @@ class GesturePassword {
   private circleR: number; // 圆的半径
   private rowPont: number; // 一行有几个圆
   private colPont: number; // 一列有几个圆
-  private initCircleCoordinate: Coordinate[] = []; // 圆的初始化坐标
-  private selectedCoordinate: Coordinate[] = []; // 圆的初始化坐标
-  private candidateCoordinate: Coordinate[] = []; // 圆的初始化坐标
+  private initCircleCoordinate: CircleCoordinate[] = []; // 圆的初始化坐标
+  private selectedCoordinate: CircleCoordinate[] = []; // 圆的初始化坐标
+  private candidateCoordinate: CircleCoordinate[] = []; // 圆的初始化坐标
   private isActive: boolean; // 是否激活状态
   private onChange: (data: any) => void; // 选择完成的响应事件
 
   constructor(props: GesturePasswordProps) {
     const {
       id,
-      el,
       width,
       height,
       background = '#FFF',
@@ -49,8 +51,15 @@ class GesturePassword {
       colPont = 3,
       onChange = () => {}
     } = props;
-    this.el = (el || window.document.getElementById(id as string)) as HTMLCanvasElement;
-    this.context = this.el.getContext('2d') as CanvasRenderingContext2D;
+
+    const el = props.el || (id && window.document.getElementById(id));
+    if (!(el instanceof HTMLCanvasElement)) {
+      throw new Error('[GesturePassword] element should be an instance of HTMLCanvasElement');
+    }
+
+    this.el = el;
+    this.context = this.el.getContext('2d')!;
+
     this.width = width;
     this.height = height;
     this.background = background;
@@ -66,6 +75,7 @@ class GesturePassword {
     this.isActive = false;
     this.initCanvas();
   }
+
   initCanvas() {
     this.initCircleCoordinate = this.getCircleCoordinate();
     this.candidateCoordinate = this.initCircleCoordinate;
@@ -76,11 +86,11 @@ class GesturePassword {
 
   addEventListener() {
     let self = this;
-    // TODO:这里的类型是什么呢？？
-    const touchstartFun = (e: any) => {
+    const touchstartFun = (e: TouchEvent | MouseEvent) => {
       e.preventDefault();
-      let po = self.getPosition(e);
-      for (let i = 0; i < this.candidateCoordinate.length; i++) {
+      const po = self.getPosition(e);
+      if (!po) return;
+      for (let i = 0; i < self.candidateCoordinate.length; i++) {
         if (self.collisionDetection(po, self.candidateCoordinate[i])) {
           self.isActive = true;
           self.selectedCoordinate.push(self.candidateCoordinate[i]);
@@ -90,18 +100,20 @@ class GesturePassword {
         }
       }
     };
-    const touchmoveFun = (e: any) => {
+    const touchmoveFun = (e: TouchEvent | MouseEvent) => {
       if (self.isActive) {
-        self.update(self.getPosition(e));
+        const po = self.getPosition(e);
+        if (!po) return;
+        self.update(po);
       }
     };
-    const touchendFun = (e: any) => {
+    const touchendFun = (e: TouchEvent | MouseEvent) => {
       if (self.isActive) {
         self.isActive = false;
         self.draw();
         // 这里应该把数据传出去
         // 重制绘图
-        this.onChange && this.onChange(self.getPassword());
+        self.onChange(self.getPassword());
         self.initCanvas();
       }
     };
@@ -163,7 +175,7 @@ class GesturePassword {
   getCircleCoordinate() {
     const offsetx = (this.width - this.rowPont * this.circleR * 2) / (this.rowPont + 1);
     const offsety = (this.height - this.rowPont * this.circleR * 2) / (this.colPont + 1);
-    let circleCoordinate: Coordinate[] = [];
+    const circleCoordinate: CircleCoordinate[] = [];
     for (let col = 0; col < this.colPont; col++) {
       for (let row = 0; row < this.rowPont; row++) {
         circleCoordinate.push({
@@ -254,21 +266,13 @@ class GesturePassword {
    * 获取点击的位置坐标
    * @param e
    */
-  getPosition(e: any) {
-    let rect = e.currentTarget.getBoundingClientRect();
-    if ('ontouchstart' in document.documentElement) {
-      let position = {
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top
-      };
-      return position;
-    } else {
-      let position = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
-      return position;
-    }
+  getPosition(e: TouchEvent | MouseEvent): Coordinate | void {
+    if (!(e.currentTarget instanceof Element)) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
   }
 }
 export default GesturePassword;
