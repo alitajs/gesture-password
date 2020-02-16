@@ -11,6 +11,7 @@ interface GesturePasswordProps {
   rowPont?: number;
   colPont?: number;
   onChange?: (values: number[]) => void;
+  updateProps?: () => void;
 }
 
 interface Coordinate {
