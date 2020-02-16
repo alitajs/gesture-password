@@ -13,14 +13,17 @@ export interface ReactGesturePasswordProps {
 }
 
 export default class ReactGesturePassword extends React.Component<ReactGesturePasswordProps, any> {
-  canvas: any;
-  el: any;
+  canvas: GesturePassword | null = null;
+  el: HTMLCanvasElement | null = null;
+
   constructor(props: ReactGesturePasswordProps) {
     super(props);
   }
 
   createCanvasInstance(props: ReactGesturePasswordProps) {
-    if (!this.canvas) {
+    if (this.canvas) {
+      this.canvas.updateProps(props);
+    } else if (this.el) {
       this.canvas = new GesturePassword({
         ...props,
         el: this.el,
@@ -35,10 +38,14 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
   }
 
   componentDidUpdate(prevProps: ReactGesturePasswordProps) {
+    const currPropsKeys = Object.keys(this.props) as (keyof ReactGesturePasswordProps)[];
+    if (currPropsKeys.length === Object.keys(prevProps).length) {
+      if (!currPropsKeys.some((key) => this.props[key] !== prevProps[key])) {
+        return;
+      }
+    }
     this.createCanvasInstance(this.props);
   }
-
-  componentWillReceiveProps(nextProps: ReactGesturePasswordProps) {}
 
   componentWillUnmount() {
     if (this.canvas) {
@@ -48,10 +55,8 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
     this.el = null;
   }
 
-  portalRef = (el: any) => {
-    if (!this.el) {
-      this.el = el;
-    }
+  portalRef = (el: HTMLCanvasElement | null) => {
+    this.el = el;
   };
 
   render() {
