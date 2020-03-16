@@ -22,7 +22,11 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
 
   createCanvasInstance(props: ReactGesturePasswordProps) {
     if (this.canvas) {
-      this.canvas.updateProps(props);
+      this.canvas.updateProps({
+        ...props,
+        width: px2hd(props.width),
+        height: px2hd(props.height)
+      });
     } else if (this.el) {
       this.canvas = new GesturePassword({
         ...props,
