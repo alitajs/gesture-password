@@ -1,6 +1,6 @@
 {
   "name": "example-react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "react example",
   "private": true,
   "main": "index.js",
@@ -9,7 +9,7 @@
     "start": "umi dev"
   },
   "dependencies": {
-    "@alitajs/gesture-password-react": "^1.0.5",
+    "@alitajs/gesture-password-react": "^1.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
