@@ -57,7 +57,7 @@ export default {
           ...props,
           width: px2hd(props.width),
           height: px2hd(props.height),
-          onChange: this.$listeners.onChange
+          onChange: this.$listeners ? this.$listeners.onChange : this.$attrs.onOnChange
         };
         this.canvas = new GesturePassword({ ...mergeProps, el: this.el });
       }

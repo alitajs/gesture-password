@@ -6,7 +6,7 @@
 <img height="300" src="https://user-images.githubusercontent.com/11746742/68995608-735b4a00-08ca-11ea-8402-2d5229beaceb.png"></img>
 </div>
 
-> The gesture password repo contains three packages: @alitajs/gesture-password (native version), @alitajs/gesture-password-react (react version), and @alitajs/>gesture-password-vue (vue version). You can install the corresponding version as required
+> The gesture password repo contains three packages: @alitajs/gesture-password (native version), @alitajs/gesture-password-react (react version), and @alitajs/gesture-password-vue (vue version). You can install the corresponding version as required
 
 ## ✨ 特性
 

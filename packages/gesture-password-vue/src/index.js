@@ -1,7 +1,5 @@
 import GesturePassword from './gesture-password.vue'
 
-GesturePassword.install = function(Vue) {
-  Vue.component(GesturePassword.name, GesturePassword);
-};
+GesturePassword.install = app => app.component(GesturePassword.name, GesturePassword)
 
-export default GesturePassword;
+export default GesturePassword
