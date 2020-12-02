@@ -1,7 +1,7 @@
 import React from 'react';
 import GesturePassword, { px2hd } from '@alitajs/gesture-password';
 
-export interface ReactGesturePasswordProps {
+export interface GesturePasswordProps {
   width: number;
   height: number;
   background?: string;
@@ -12,15 +12,15 @@ export interface ReactGesturePasswordProps {
   onChange?: (values: number[]) => void;
 }
 
-export default class ReactGesturePassword extends React.Component<ReactGesturePasswordProps, any> {
+export default class ReactGesturePassword extends React.Component<GesturePasswordProps, any> {
   canvas: GesturePassword | null = null;
   el: HTMLCanvasElement | null = null;
 
-  constructor(props: ReactGesturePasswordProps) {
+  constructor(props: GesturePasswordProps) {
     super(props);
   }
 
-  createCanvasInstance(props: ReactGesturePasswordProps) {
+  createCanvasInstance(props: GesturePasswordProps) {
     if (this.canvas) {
       this.canvas.updateProps({
         ...props,
@@ -41,8 +41,8 @@ export default class ReactGesturePassword extends React.Component<ReactGesturePa
     this.createCanvasInstance(this.props);
   }
 
-  componentDidUpdate(prevProps: ReactGesturePasswordProps) {
-    const currPropsKeys = Object.keys(this.props) as (keyof ReactGesturePasswordProps)[];
+  componentDidUpdate(prevProps: GesturePasswordProps) {
+    const currPropsKeys = Object.keys(this.props) as (keyof GesturePasswordProps)[];
     if (currPropsKeys.length === Object.keys(prevProps).length) {
       if (!currPropsKeys.some((key) => this.props[key] !== prevProps[key])) {
         return;

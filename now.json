@@ -1,13 +1,14 @@
 {
-  "name": "gesture-password",
+  "name": "react-components",
   "version": 2,
   "builds": [
     {
       "src": "build.sh",
       "use": "@now/static-build",
       "config": {
-        "distDir": "public"
+        "distDir": "dist"
       }
     }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
