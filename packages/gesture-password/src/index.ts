@@ -12,6 +12,7 @@ interface GesturePasswordProps {
   colPont?: number;
   onChange?: (values: number[]) => void;
   updateProps?: () => void;
+  onCustomizeDraw?: (obj: object) => void;
 }
 
 interface Coordinate {
@@ -39,6 +40,7 @@ class GesturePassword {
   private candidateCoordinate: CircleCoordinate[] = []; // 圆的初始化坐标
   private isActive: boolean; // 是否激活状态
   private onChange: (data: any) => void; // 选择完成的响应事件
+  private onCustomizeDraw: ((obj: object) => void) | undefined; // 自定义draw方法
 
   constructor(props: GesturePasswordProps) {
     const {
@@ -50,7 +52,8 @@ class GesturePassword {
       lineBackground = '#D9EDFF',
       rowPont = 3,
       colPont = 3,
-      onChange = () => {}
+      onChange = () => {},
+      onCustomizeDraw
     } = props;
 
     const el = props.el || (id && window.document.getElementById(id));
@@ -67,6 +70,7 @@ class GesturePassword {
     this.lineColor = lineColor;
     this.lineBackground = lineBackground;
     this.onChange = onChange;
+    this.onCustomizeDraw = onCustomizeDraw;
     this.circleR = (this.width * 28) / 375;
     if (this.width > this.height) {
       this.circleR = (this.height * 28) / 375;
@@ -87,7 +91,8 @@ class GesturePassword {
       lineBackground = '#D9EDFF',
       rowPont = 3,
       colPont = 3,
-      onChange = () => {}
+      onChange = () => {},
+      onCustomizeDraw
     } = props;
 
     this.width = width;
@@ -96,6 +101,7 @@ class GesturePassword {
     this.lineColor = lineColor;
     this.lineBackground = lineBackground;
     this.onChange = onChange;
+    this.onCustomizeDraw = onCustomizeDraw;
     this.circleR = (this.width * 28) / 375;
     if (this.width > this.height) {
       this.circleR = (this.height * 28) / 375;
@@ -217,77 +223,98 @@ class GesturePassword {
   }
 
   /**
+    * 默认绘制函数
+    */
+   onDefaultDraw() {
+     // 清空绘图
+     this.context.clearRect(0, 0, this.width, this.height);
+     // 绘制背景
+     this.context.fillStyle = this.background;
+     this.context.fillRect(0, 0, this.width, this.height);
+     // 绘制默认圆点
+     this.context.lineWidth = 1;
+     this.context.strokeStyle = this.lineColor;
+     this.context.beginPath();
+     for (let i = 0, r = this.circleR; i < this.initCircleCoordinate.length; i++) {
+       this.context.moveTo(this.initCircleCoordinate[i].x + r, this.initCircleCoordinate[i].y);
+       this.context.arc(
+         this.initCircleCoordinate[i].x,
+         this.initCircleCoordinate[i].y,
+         r,
+         0,
+         Math.PI * 2,
+         true
+       );
+     }
+     this.context.stroke();
+     this.context.closePath();
+     // 绘制连线
+     this.context.strokeStyle = this.lineColor;
+     this.context.beginPath();
+     for (let i = 0; i < this.selectedCoordinate.length; i++) {
+       this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
+     }
+     this.context.stroke();
+     this.context.closePath();
+     // 绘制被选中的点的背景 #D9EDFF
+     this.context.fillStyle = this.lineBackground;
+     this.context.beginPath();
+     for (let i = 0; i < this.selectedCoordinate.length; i++) {
+       this.context.moveTo(
+         this.selectedCoordinate[i].x + this.circleR / 2,
+         this.selectedCoordinate[i].y
+       );
+       this.context.arc(
+         this.selectedCoordinate[i].x,
+         this.selectedCoordinate[i].y,
+         this.circleR,
+         0,
+         Math.PI * 2,
+         true
+       );
+     }
+     this.context.fill();
+     this.context.closePath();
+     // 绘制被选中的点的中心圆 大小是圆面积的 20/56
+     this.context.fillStyle = this.lineColor;
+     this.context.beginPath();
+     for (let i = 0; i < this.selectedCoordinate.length; i++) {
+       this.context.moveTo(
+         this.selectedCoordinate[i].x + this.circleR / 2,
+         this.selectedCoordinate[i].y
+       );
+       this.context.arc(
+         this.selectedCoordinate[i].x,
+         this.selectedCoordinate[i].y,
+         (this.circleR * 20) / 56,
+         0,
+         Math.PI * 2,
+         true
+       );
+     }
+     this.context.fill();
+     this.context.closePath();
+   }
+
+  /**
    * 绘制函数
    */
   draw() {
-    // 清空绘图
-    this.context.clearRect(0, 0, this.width, this.height);
-    // 绘制背景
-    this.context.fillStyle = this.background;
-    this.context.fillRect(0, 0, this.width, this.height);
-    // 绘制默认圆点
-    this.context.lineWidth = 1;
-    this.context.strokeStyle = this.lineColor;
-    this.context.beginPath();
-    for (let i = 0, r = this.circleR; i < this.initCircleCoordinate.length; i++) {
-      this.context.moveTo(this.initCircleCoordinate[i].x + r, this.initCircleCoordinate[i].y);
-      this.context.arc(
-        this.initCircleCoordinate[i].x,
-        this.initCircleCoordinate[i].y,
-        r,
-        0,
-        Math.PI * 2,
-        true
-      );
+    if (this.onCustomizeDraw) {
+     this.onCustomizeDraw({
+       context: this.context,
+       width: this.width,
+       height: this.height,
+       background: this.background,
+       lineColor: this.lineColor,
+       lineBackground: this.lineBackground,
+       initCircleCoordinate: this.initCircleCoordinate,
+       circleR: this.circleR,
+       selectedCoordinate: this.selectedCoordinate
+     });
+    } else {
+       this.onDefaultDraw();
     }
-    this.context.stroke();
-    this.context.closePath();
-    // 绘制连线
-    this.context.strokeStyle = this.lineColor;
-    this.context.beginPath();
-    for (let i = 0; i < this.selectedCoordinate.length; i++) {
-      this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
-    }
-    this.context.stroke();
-    this.context.closePath();
-    // 绘制被选中的点的背景 #D9EDFF
-    this.context.fillStyle = this.lineBackground;
-    this.context.beginPath();
-    for (let i = 0; i < this.selectedCoordinate.length; i++) {
-      this.context.moveTo(
-        this.selectedCoordinate[i].x + this.circleR / 2,
-        this.selectedCoordinate[i].y
-      );
-      this.context.arc(
-        this.selectedCoordinate[i].x,
-        this.selectedCoordinate[i].y,
-        this.circleR,
-        0,
-        Math.PI * 2,
-        true
-      );
-    }
-    this.context.fill();
-    this.context.closePath();
-    // 绘制被选中的点的中心圆 大小是圆面积的 20/56
-    this.context.fillStyle = this.lineColor;
-    this.context.beginPath();
-    for (let i = 0; i < this.selectedCoordinate.length; i++) {
-      this.context.moveTo(
-        this.selectedCoordinate[i].x + this.circleR / 2,
-        this.selectedCoordinate[i].y
-      );
-      this.context.arc(
-        this.selectedCoordinate[i].x,
-        this.selectedCoordinate[i].y,
-        (this.circleR * 20) / 56,
-        0,
-        Math.PI * 2,
-        true
-      );
-    }
-    this.context.fill();
-    this.context.closePath();
   }
 
   /**
