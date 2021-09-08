@@ -3,38 +3,38 @@
 </template>
 
 <script>
-import GesturePassword, { px2hd } from '@alitajs/gesture-password';
+import GesturePassword, { px2hd } from "@alitajs/gesture-password";
 
 export default {
-  name: 'GesturePassword',
+  name: "GesturePassword",
   props: {
     width: {
       type: Number,
-      required: true
+      required: true,
     },
     height: {
       type: Number,
-      required: true
+      required: true,
     },
     background: String,
     lineColor: String,
     lineBackground: String,
     rowPont: Number,
-    colPont: Number
+    colPont: Number,
   },
   data() {
     return {
       canvas: null,
-      el: null
+      el: null,
     };
   },
   computed: {
-    px2hdHeight: function() {
+    px2hdHeight: function () {
       return px2hd(this.height);
     },
-    px2hdWidth: function() {
+    px2hdWidth: function () {
       return px2hd(this.width);
-    }
+    },
   },
   mounted() {
     this.portalRef();
@@ -57,7 +57,12 @@ export default {
           ...props,
           width: px2hd(props.width),
           height: px2hd(props.height),
-          onChange: this.$listeners ? this.$listeners.onChange : this.$attrs.onOnChange
+          onChange: this.$listeners
+            ? this.$listeners.onChange
+            : this.$attrs.onOnChange,
+          onCustomizeDraw: this.$listeners
+            ? this.$listeners.onCustomizeDraw
+            : this.$attrs.onOnCustomizeDraw,
         };
         this.canvas = new GesturePassword({ ...mergeProps, el: this.el });
       }
@@ -66,7 +71,7 @@ export default {
       if (!this.el) {
         this.el = this.$refs.canvasRef;
       }
-    }
-  }
+    },
+  },
 };
 </script>
