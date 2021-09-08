@@ -10,6 +10,7 @@ export interface GesturePasswordProps {
   rowPont?: number;
   colPont?: number;
   onChange?: (values: number[]) => void;
+  onCustomizeDraw?: (obj: object) => void;
 }
 
 export default class ReactGesturePassword extends React.Component<GesturePasswordProps, any> {
