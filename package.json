@@ -12,7 +12,6 @@
     "prettier": "walrus prettier",
     "lint": "walrus lint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
-    "prerelease": "yarn build",
     "release": "release"
   },
   "license": "MIT",
