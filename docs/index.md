@@ -47,3 +47,4 @@ export default () => {
 | rowPont | 一行有几个圆点        | `number`            | `3`    | --   |
 | colPont | 一列有几个圆点        | `number`            | `3`    | --   |
 | onChange | 手势改变时的回调        | `(data) => void`            | --    | --   |
+| onCustomizeDraw | 自定义绘制手势Canvas UI的回调        | `(obj: object) => void`            | --    |  `1.0.7`  |

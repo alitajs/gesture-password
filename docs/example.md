@@ -11,3 +11,7 @@
 ## 自定义样式
 
 <code src="./demo/demo-03.tsx" />
+
+## 自定义手势Canvas样式
+
+<code src="./demo/demo-04.tsx" />
