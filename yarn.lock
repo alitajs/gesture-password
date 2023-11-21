@@ -4466,7 +4466,7 @@
   dependencies:
     "@walrus/types" "1.3.4"
 
-"@walrus/preset-lint@^1.1.7":
+"@walrus/preset-lint@1.1.7":
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/@walrus/preset-lint/-/preset-lint-1.1.7.tgz#c2a79522a45c48e033702a2168e6dbb34af07c4a"
   integrity sha512-HZCp+VonYxlcdVNHU4TL/GHwqYWLnmistrKqQqhcfeK4Qw9cqdFJmDAfcvV+4z8uyuvB/KAekiGSJaBT/LwsfQ==
@@ -4476,7 +4476,7 @@
     "@walrus/plugin-prettier" "1.2.2"
     "@walrus/plugin-stylelint" "1.2.1"
 
-"@walrus/release-cli@^1.0.5":
+"@walrus/release-cli@1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@walrus/release-cli/-/release-cli-1.0.5.tgz#2a76c0f86fe621834fb30a842543ac91c8ba9b11"
   integrity sha512-sLhuFsOtdCpZvU2lwjDGFNIVJw+Ynn2rH1AHK5TBt3i43dfHO4MkqXlZbEt/+GDhI+2bL3AIm4Yk9V22cisC5A==
