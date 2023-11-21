@@ -1,6 +1,6 @@
 {
   "name": "@alitajs/gesture-password-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "GesturePassword react component",
   "author": "Alita Team",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "react": "*"
   },
   "dependencies": {
-    "@alitajs/gesture-password": "1.1.0"
+    "@alitajs/gesture-password": "1.1.1"
   },
   "devDependencies": {
     "@types/react": "*",
