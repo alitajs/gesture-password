@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import GesturePassword, { px2hd } from '@alitajs/gesture-password';
+import GesturePassword, { px2hd, hd } from '@alitajs/gesture-password';
 
 export default {
   name: 'GesturePassword',
@@ -20,7 +20,8 @@ export default {
     lineColor: String,
     lineBackground: String,
     rowPont: Number,
-    colPont: Number
+    colPont: Number,
+    hd: Boolean
   },
   data() {
     return {
@@ -52,6 +53,9 @@ export default {
   },
   methods: {
     createCanvasInstance(props) {
+      if(props?.hd){
+        hd();
+      }
       if (!this.canvas) {
         const mergeProps = {
           ...props,

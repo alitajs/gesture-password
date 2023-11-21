@@ -1,16 +1,18 @@
 import React from 'react';
-import GesturePassword, { px2hd } from '@alitajs/gesture-password';
+import GesturePassword, { px2hd, hd } from '@alitajs/gesture-password';
 
 export interface GesturePasswordProps {
   width: number;
   height: number;
   background?: string;
+  lineWidth?: number;
   lineColor?: string;
   lineBackground?: string;
   rowPont?: number;
   colPont?: number;
   onChange?: (values: number[]) => void;
   onCustomizeDraw?: (obj: object) => void;
+  hd?: boolean;
 }
 
 export default class ReactGesturePassword extends React.Component<GesturePasswordProps, any> {
@@ -19,6 +21,9 @@ export default class ReactGesturePassword extends React.Component<GesturePasswor
 
   constructor(props: GesturePasswordProps) {
     super(props);
+    if(props?.hd){
+      hd();
+    }
   }
 
   createCanvasInstance(props: GesturePasswordProps) {

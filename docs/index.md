@@ -48,3 +48,5 @@ export default () => {
 | colPont | 一列有几个圆点        | `number`            | `3`    | --   |
 | onChange | 手势改变时的回调        | `(data) => void`            | --    | --   |
 | onCustomizeDraw | 自定义绘制手势Canvas UI的回调        | `(obj: object) => void`            | --    |  `1.0.7`  |
+| lineWidth | 线条宽度        | `number`  | `1px`   |  `1.0.9`  |
+| hd | 是否需要高清方案        | `boolean`  | --    |  `1.0.9`  |

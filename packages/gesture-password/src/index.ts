@@ -1,10 +1,11 @@
 export * from './utils';
-
+export * from './hd';
 interface GesturePasswordProps {
   id?: string;
   el?: HTMLCanvasElement;
   width: number;
   height: number;
+  lineWidth?: number;
   background?: string;
   lineColor?: string;
   lineBackground?: string;
@@ -29,6 +30,7 @@ class GesturePassword {
   private context: CanvasRenderingContext2D;
   private width: number; // 画布的宽
   private height: number; // 画布的高
+  private lineWidth: number; // 线条宽度
   private background: string; // 背景颜色
   private lineColor: string; // 线颜色
   private lineBackground: string; // 线背景颜色
@@ -53,7 +55,8 @@ class GesturePassword {
       rowPont = 3,
       colPont = 3,
       onChange = () => {},
-      onCustomizeDraw
+      onCustomizeDraw,
+      lineWidth = 1
     } = props;
 
     const el = props.el || (id && window.document.getElementById(id));
@@ -63,9 +66,10 @@ class GesturePassword {
 
     this.el = el;
     this.context = this.el.getContext('2d')!;
-
     this.width = width;
     this.height = height;
+    this.lineWidth = lineWidth;
+    console.log(lineWidth)
     this.background = background;
     this.lineColor = lineColor;
     this.lineBackground = lineBackground;
@@ -92,11 +96,13 @@ class GesturePassword {
       rowPont = 3,
       colPont = 3,
       onChange = () => {},
-      onCustomizeDraw
+      onCustomizeDraw,
+      lineWidth = 1
     } = props;
 
     this.width = width;
     this.height = height;
+    this.lineWidth = lineWidth;
     this.background = background;
     this.lineColor = lineColor;
     this.lineBackground = lineBackground;
@@ -232,7 +238,7 @@ class GesturePassword {
      this.context.fillStyle = this.background;
      this.context.fillRect(0, 0, this.width, this.height);
      // 绘制默认圆点
-     this.context.lineWidth = 1;
+     this.context.lineWidth = this.lineWidth;
      this.context.strokeStyle = this.lineColor;
      this.context.beginPath();
      for (let i = 0, r = this.circleR; i < this.initCircleCoordinate.length; i++) {
