@@ -16,5 +16,6 @@
       "PR: Underlying Tools": ":hammer: Underlying Tools"
     },
     "cacheDir": ".changelog"
-  }
+  },
+  "registry": "https://registry.npmjs.org/"
 }

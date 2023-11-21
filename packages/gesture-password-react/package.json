@@ -16,14 +16,14 @@
     "build": "node ../../node_modules/@walrus/pansy/dist/cli.js"
   },
   "peerDependencies": {
-    "react": "^16.8.5"
+    "react": "*"
   },
   "dependencies": {
     "@alitajs/gesture-password": "1.1.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.11",
-    "react": "^16.12.0"
+    "@types/react": "*",
+    "react": "*"
   },
   "publishConfig": {
     "access": "public"
