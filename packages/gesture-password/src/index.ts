@@ -66,9 +66,6 @@ class GesturePassword {
 
     this.el = el;
     this.context = this.el.getContext('2d')!;
-this.context.imageSmoothingEnabled = true;
-this.context.lineCap = 'round';
-this.context.lineJoin = 'round';
     this.width = width;
     this.height = height;
     this.lineWidth = lineWidth;
@@ -252,7 +249,7 @@ this.context.lineJoin = 'round';
          r,
          0,
          Math.PI * 2,
-         false
+         true
        );
      }
      this.context.stroke();
