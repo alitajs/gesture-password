@@ -4,6 +4,10 @@
 
 <code src="./demo/demo-01.tsx" />
 
+## 回显且不可编辑示例
+
+<code src="./demo/demo-05.tsx" />
+
 ## 自定义行列数量
 
 <code src="./demo/demo-02.tsx" />

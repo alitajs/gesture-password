@@ -21,7 +21,9 @@ export default {
     lineBackground: String,
     rowPont: Number,
     colPont: Number,
-    hd: Boolean
+    hd: Boolean,
+    value: [Number],
+    disable: Boolean,
   },
   data() {
     return {

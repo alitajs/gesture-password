@@ -14,6 +14,8 @@ interface GesturePasswordProps {
   onChange?: (values: number[]) => void;
   updateProps?: () => void;
   onCustomizeDraw?: (obj: object) => void;
+  value?: number[];
+  disable?: boolean;
 }
 
 interface Coordinate {
@@ -56,7 +58,9 @@ class GesturePassword {
       colPont = 3,
       onChange = () => {},
       onCustomizeDraw,
-      lineWidth = 1
+      lineWidth = 1,
+      value,
+      disable
     } = props;
 
     const el = props.el || (id && window.document.getElementById(id));
@@ -82,8 +86,8 @@ class GesturePassword {
     this.rowPont = rowPont;
     this.colPont = colPont;
     this.isActive = false;
-    this.initCanvas();
-    this.addEventListener();
+    this.initCanvas(value);
+    this.addEventListener(disable);
   }
 
   updateProps(props: Omit<GesturePasswordProps, 'el' | 'id'>) {
@@ -97,7 +101,8 @@ class GesturePassword {
       colPont = 3,
       onChange = () => {},
       onCustomizeDraw,
-      lineWidth = 1
+      lineWidth = 1,
+      value
     } = props;
 
     this.width = width;
@@ -114,22 +119,28 @@ class GesturePassword {
     }
     this.rowPont = rowPont;
     this.colPont = colPont;
-    this.initCanvas();
+    this.initCanvas(value);
   }
 
-  initCanvas() {
+  initCanvas(value?:number[]) {
     this.initCircleCoordinate = this.getCircleCoordinate();
     this.candidateCoordinate = this.initCircleCoordinate;
-    this.selectedCoordinate = [];
+    this.selectedCoordinate = value?.map(key=>{
+      return this.initCircleCoordinate.filter(i=>i.key === key)[0];
+    })??[];
+    console.log(value);
     this.draw();
   }
 
-  addEventListener() {
+  addEventListener(disable = false) {
+    if(disable) return;
     let self = this;
     const touchstartFun = (e: TouchEvent | MouseEvent) => {
       e.preventDefault();
       const po = self.getPosition(e);
       if (!po) return;
+      // 如果有值回显，开始画的时候需要清楚
+      self.selectedCoordinate = [];
       for (let i = 0; i < self.candidateCoordinate.length; i++) {
         if (self.collisionDetection(po, self.candidateCoordinate[i])) {
           self.isActive = true;
