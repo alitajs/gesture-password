@@ -22,7 +22,7 @@ export default {
     rowPont: Number,
     colPont: Number,
     hd: Boolean,
-    value: [Number],
+    value: { type: Array, default: () => [], validator: (value) => { return value.every((item) => typeof item === 'number'); }, }
     disable: Boolean,
   },
   data() {
@@ -32,10 +32,10 @@ export default {
     };
   },
   computed: {
-    px2hdHeight: function() {
+    px2hdHeight: function () {
       return px2hd(this.height);
     },
-    px2hdWidth: function() {
+    px2hdWidth: function () {
       return px2hd(this.width);
     }
   },
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     createCanvasInstance(props) {
-      if(props?.hd){
+      if (props?.hd) {
         hd();
       }
       if (!this.canvas) {
