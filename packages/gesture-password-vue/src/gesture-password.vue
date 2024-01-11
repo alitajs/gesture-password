@@ -22,7 +22,13 @@ export default {
     rowPont: Number,
     colPont: Number,
     hd: Boolean,
-    value: { type: Array, default: () => [], validator: (value) => { return value.every((item) => typeof item === 'number'); }, }
+    value: { 
+      type: Array, 
+      default: () => [], 
+      validator: (value) => { 
+        return value.every((item) => typeof item === 'number'); 
+      }, 
+    },
     disable: Boolean,
   },
   data() {
