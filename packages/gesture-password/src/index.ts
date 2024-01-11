@@ -1,5 +1,5 @@
-export * from './utils';
-export * from './hd';
+export * from "./utils";
+export * from "./hd";
 interface GesturePasswordProps {
   id?: string;
   el?: HTMLCanvasElement;
@@ -51,9 +51,9 @@ class GesturePassword {
       id,
       width,
       height,
-      background = '#FFF',
-      lineColor = '#0089FF',
-      lineBackground = '#D9EDFF',
+      background = "#FFF",
+      lineColor = "#0089FF",
+      lineBackground = "#D9EDFF",
       rowPont = 3,
       colPont = 3,
       onChange = () => {},
@@ -65,15 +65,16 @@ class GesturePassword {
 
     const el = props.el || (id && window.document.getElementById(id));
     if (!(el instanceof HTMLCanvasElement)) {
-      throw new Error('[GesturePassword] element should be an instance of HTMLCanvasElement');
+      throw new Error(
+        "[GesturePassword] element should be an instance of HTMLCanvasElement"
+      );
     }
 
     this.el = el;
-    this.context = this.el.getContext('2d')!;
+    this.context = this.el.getContext("2d")!;
     this.width = width;
     this.height = height;
     this.lineWidth = lineWidth;
-    console.log(lineWidth)
     this.background = background;
     this.lineColor = lineColor;
     this.lineBackground = lineBackground;
@@ -90,50 +91,51 @@ class GesturePassword {
     this.addEventListener(disable);
   }
 
-  updateProps(props: Omit<GesturePasswordProps, 'el' | 'id'>) {
-    const {
-      width,
-      height,
-      background = '#FFF',
-      lineColor = '#0089FF',
-      lineBackground = '#D9EDFF',
-      rowPont = 3,
-      colPont = 3,
-      onChange = () => {},
-      onCustomizeDraw,
-      lineWidth = 1,
-      value
-    } = props;
-
-    this.width = width;
-    this.height = height;
-    this.lineWidth = lineWidth;
-    this.background = background;
-    this.lineColor = lineColor;
-    this.lineBackground = lineBackground;
-    this.onChange = onChange;
-    this.onCustomizeDraw = onCustomizeDraw;
-    this.circleR = (this.width * 28) / 375;
-    if (this.width > this.height) {
-      this.circleR = (this.height * 28) / 375;
-    }
-    this.rowPont = rowPont;
-    this.colPont = colPont;
-    this.initCanvas(value);
+  updateProps(props: Omit<GesturePasswordProps, "el" | "id">) {
+    setTimeout(() => {
+      const {
+        width,
+        height,
+        background = "#FFF",
+        lineColor = "#0089FF",
+        lineBackground = "#D9EDFF",
+        rowPont = 3,
+        colPont = 3,
+        onChange = () => {},
+        onCustomizeDraw,
+        lineWidth = 1,
+        value
+      } = props;
+      this.width = width;
+      this.height = height;
+      this.lineWidth = lineWidth;
+      this.background = background;
+      this.lineColor = lineColor;
+      this.lineBackground = lineBackground;
+      this.onChange = onChange;
+      this.onCustomizeDraw = onCustomizeDraw;
+      this.circleR = (this.width * 28) / 375;
+      if (this.width > this.height) {
+        this.circleR = (this.height * 28) / 375;
+      }
+      this.rowPont = rowPont;
+      this.colPont = colPont;
+      this.initCanvas(value);
+    }, 10);
   }
 
-  initCanvas(value?:number[]) {
+  initCanvas(value?: number[]) {
     this.initCircleCoordinate = this.getCircleCoordinate();
     this.candidateCoordinate = this.initCircleCoordinate;
-    this.selectedCoordinate = value?.map(key=>{
-      return this.initCircleCoordinate.filter(i=>i.key === key)[0];
-    })??[];
-    console.log(value);
+    this.selectedCoordinate =
+      value?.map(key => {
+        return this.initCircleCoordinate.filter(i => i.key === key)[0];
+      }) ?? [];
     this.draw();
   }
 
   addEventListener(disable = false) {
-    if(disable) return;
+    if (disable) return;
     let self = this;
     const touchstartFun = (e: TouchEvent | MouseEvent) => {
       e.preventDefault();
@@ -170,19 +172,19 @@ class GesturePassword {
     };
     // <!-- <script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script> -->
     // 设备兼容
-    if ('ontouchstart' in document.documentElement) {
-      this.el.addEventListener('touchstart', touchstartFun, false);
-      this.el.addEventListener('touchmove', touchmoveFun, false);
-      this.el.addEventListener('touchend', touchendFun, false);
+    if ("ontouchstart" in document.documentElement) {
+      this.el.addEventListener("touchstart", touchstartFun, false);
+      this.el.addEventListener("touchmove", touchmoveFun, false);
+      this.el.addEventListener("touchend", touchendFun, false);
     } else {
-      this.el.addEventListener('mousedown', touchstartFun, false);
-      this.el.addEventListener('mousemove', touchmoveFun, false);
-      this.el.addEventListener('mouseup', touchendFun, false);
+      this.el.addEventListener("mousedown", touchstartFun, false);
+      this.el.addEventListener("mousemove", touchmoveFun, false);
+      this.el.addEventListener("mouseup", touchendFun, false);
     }
   }
 
   getPassword() {
-    return this.selectedCoordinate.map((i) => i.key);
+    return this.selectedCoordinate.map(i => i.key);
   }
 
   /**
@@ -224,8 +226,10 @@ class GesturePassword {
    * 获取点的坐标
    */
   getCircleCoordinate() {
-    const offsetx = (this.width - this.rowPont * this.circleR * 2) / (this.rowPont + 1);
-    const offsety = (this.height - this.rowPont * this.circleR * 2) / (this.colPont + 1);
+    const offsetx =
+      (this.width - this.rowPont * this.circleR * 2) / (this.rowPont + 1);
+    const offsety =
+      (this.height - this.rowPont * this.circleR * 2) / (this.colPont + 1);
     const circleCoordinate: CircleCoordinate[] = [];
     for (let col = 0; col < this.colPont; col++) {
       for (let row = 0; row < this.rowPont; row++) {
@@ -240,97 +244,107 @@ class GesturePassword {
   }
 
   /**
-    * 默认绘制函数
-    */
-   onDefaultDraw() {
-     // 清空绘图
-     this.context.clearRect(0, 0, this.width, this.height);
-     // 绘制背景
-     this.context.fillStyle = this.background;
-     this.context.fillRect(0, 0, this.width, this.height);
-     // 绘制默认圆点
-     this.context.lineWidth = this.lineWidth;
-     this.context.strokeStyle = this.lineColor;
-     this.context.beginPath();
-     for (let i = 0, r = this.circleR; i < this.initCircleCoordinate.length; i++) {
-       this.context.moveTo(this.initCircleCoordinate[i].x + r, this.initCircleCoordinate[i].y);
-       this.context.arc(
-         this.initCircleCoordinate[i].x,
-         this.initCircleCoordinate[i].y,
-         r,
-         0,
-         Math.PI * 2,
-         true
-       );
-     }
-     this.context.stroke();
-     this.context.closePath();
-     // 绘制连线
-     this.context.strokeStyle = this.lineColor;
-     this.context.beginPath();
-     for (let i = 0; i < this.selectedCoordinate.length; i++) {
-       this.context.lineTo(this.selectedCoordinate[i].x, this.selectedCoordinate[i].y);
-     }
-     this.context.stroke();
-     this.context.closePath();
-     // 绘制被选中的点的背景 #D9EDFF
-     this.context.fillStyle = this.lineBackground;
-     this.context.beginPath();
-     for (let i = 0; i < this.selectedCoordinate.length; i++) {
-       this.context.moveTo(
-         this.selectedCoordinate[i].x + this.circleR / 2,
-         this.selectedCoordinate[i].y
-       );
-       this.context.arc(
-         this.selectedCoordinate[i].x,
-         this.selectedCoordinate[i].y,
-         this.circleR,
-         0,
-         Math.PI * 2,
-         true
-       );
-     }
-     this.context.fill();
-     this.context.closePath();
-     // 绘制被选中的点的中心圆 大小是圆面积的 20/56
-     this.context.fillStyle = this.lineColor;
-     this.context.beginPath();
-     for (let i = 0; i < this.selectedCoordinate.length; i++) {
-       this.context.moveTo(
-         this.selectedCoordinate[i].x + this.circleR / 2,
-         this.selectedCoordinate[i].y
-       );
-       this.context.arc(
-         this.selectedCoordinate[i].x,
-         this.selectedCoordinate[i].y,
-         (this.circleR * 20) / 56,
-         0,
-         Math.PI * 2,
-         true
-       );
-     }
-     this.context.fill();
-     this.context.closePath();
-   }
+   * 默认绘制函数
+   */
+  onDefaultDraw() {
+    // 清空绘图
+    this.context.clearRect(0, 0, this.width, this.height);
+    // 绘制背景
+    this.context.fillStyle = this.background;
+    this.context.fillRect(0, 0, this.width, this.height);
+    // 绘制默认圆点
+    this.context.lineWidth = this.lineWidth;
+    this.context.strokeStyle = this.lineColor;
+    this.context.beginPath();
+    for (
+      let i = 0, r = this.circleR;
+      i < this.initCircleCoordinate.length;
+      i++
+    ) {
+      this.context.moveTo(
+        this.initCircleCoordinate[i].x + r,
+        this.initCircleCoordinate[i].y
+      );
+      this.context.arc(
+        this.initCircleCoordinate[i].x,
+        this.initCircleCoordinate[i].y,
+        r,
+        0,
+        Math.PI * 2,
+        true
+      );
+    }
+    this.context.stroke();
+    this.context.closePath();
+    // 绘制连线
+    this.context.strokeStyle = this.lineColor;
+    this.context.beginPath();
+    for (let i = 0; i < this.selectedCoordinate.length; i++) {
+      this.context.lineTo(
+        this.selectedCoordinate[i].x,
+        this.selectedCoordinate[i].y
+      );
+    }
+    this.context.stroke();
+    this.context.closePath();
+    // 绘制被选中的点的背景 #D9EDFF
+    this.context.fillStyle = this.lineBackground;
+    this.context.beginPath();
+    for (let i = 0; i < this.selectedCoordinate.length; i++) {
+      this.context.moveTo(
+        this.selectedCoordinate[i].x + this.circleR / 2,
+        this.selectedCoordinate[i].y
+      );
+      this.context.arc(
+        this.selectedCoordinate[i].x,
+        this.selectedCoordinate[i].y,
+        this.circleR,
+        0,
+        Math.PI * 2,
+        true
+      );
+    }
+    this.context.fill();
+    this.context.closePath();
+    // 绘制被选中的点的中心圆 大小是圆面积的 20/56
+    this.context.fillStyle = this.lineColor;
+    this.context.beginPath();
+    for (let i = 0; i < this.selectedCoordinate.length; i++) {
+      this.context.moveTo(
+        this.selectedCoordinate[i].x + this.circleR / 2,
+        this.selectedCoordinate[i].y
+      );
+      this.context.arc(
+        this.selectedCoordinate[i].x,
+        this.selectedCoordinate[i].y,
+        (this.circleR * 20) / 56,
+        0,
+        Math.PI * 2,
+        true
+      );
+    }
+    this.context.fill();
+    this.context.closePath();
+  }
 
   /**
    * 绘制函数
    */
   draw() {
     if (this.onCustomizeDraw) {
-     this.onCustomizeDraw({
-       context: this.context,
-       width: this.width,
-       height: this.height,
-       background: this.background,
-       lineColor: this.lineColor,
-       lineBackground: this.lineBackground,
-       initCircleCoordinate: this.initCircleCoordinate,
-       circleR: this.circleR,
-       selectedCoordinate: this.selectedCoordinate
-     });
+      this.onCustomizeDraw({
+        context: this.context,
+        width: this.width,
+        height: this.height,
+        background: this.background,
+        lineColor: this.lineColor,
+        lineBackground: this.lineBackground,
+        initCircleCoordinate: this.initCircleCoordinate,
+        circleR: this.circleR,
+        selectedCoordinate: this.selectedCoordinate
+      });
     } else {
-       this.onDefaultDraw();
+      this.onDefaultDraw();
     }
   }
 
@@ -342,8 +356,8 @@ class GesturePassword {
     if (!(e.currentTarget instanceof Element)) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
     return { x: clientX - rect.left, y: clientY - rect.top };
   }
 }

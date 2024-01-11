@@ -4,7 +4,7 @@
 
 <code src="./demo/demo-01.tsx" />
 
-## 回显且不可编辑示例
+## 回显示例
 
 <code src="./demo/demo-05.tsx" />
 
