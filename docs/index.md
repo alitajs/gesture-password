@@ -50,3 +50,5 @@ export default () => {
 | onCustomizeDraw | 自定义绘制手势Canvas UI的回调        | `(obj: object) => void`            | --    |  `1.0.7`  |
 | lineWidth | 线条宽度        | `number`  | `1px`   |  `1.0.9`  |
 | hd | 是否需要高清方案        | `boolean`  | --    |  `1.0.9`  |
+| value | 用于图形回显示        | `number []`  | --    |  `1.0.9`  |
+| disable | 是否不可编辑，大概率和图形回显组合使用   | `boolean`  | --    |  `1.0.9`  |
